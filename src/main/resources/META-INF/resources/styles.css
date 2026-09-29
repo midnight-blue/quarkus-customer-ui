@@ -4,6 +4,118 @@
    https://vaadin.com/docs/latest/styling/lumo for more information.
 */
 
+/*
+   Color theme: six families (brand, action, success, accent, danger, grey),
+   each on a 10-step luminosity scale (0, 5, 15, 30, 45, 60, 75, 90, 100, 105).
+   Step 0 is the lightest tint, step 100 is the full saturated color, and
+   step 105 is an extra-dark "ink" shade beyond the normal ramp (for
+   high-contrast text on light backgrounds). Values are defined in OKLCH so
+   lightness is perceptually even across families; hue/chroma stay fixed per
+   family and only lightness (plus a matching chroma taper) changes per step.
+*/
+@theme {
+  /* brand — primary identity color (teal-blue) */
+  --color-brand-0: oklch(97% 0.007 205);
+  --color-brand-5: oklch(93% 0.016 205);
+  --color-brand-15: oklch(86% 0.036 205);
+  --color-brand-30: oklch(74% 0.072 205);
+  --color-brand-45: oklch(62% 0.104 205);
+  --color-brand-60: oklch(52% 0.13 205);
+  --color-brand-75: oklch(43% 0.12 205);
+  --color-brand-90: oklch(35% 0.101 205);
+  --color-brand-100: oklch(27% 0.081 205);
+  --color-brand-105: oklch(16% 0.046 205);
+
+  /* action — interactive elements (links, buttons, focus) */
+  --color-action-0: oklch(97% 0.008 255);
+  --color-action-5: oklch(93% 0.019 255);
+  --color-action-15: oklch(86% 0.045 255);
+  --color-action-30: oklch(74% 0.088 255);
+  --color-action-45: oklch(62% 0.128 255);
+  --color-action-60: oklch(52% 0.16 255);
+  --color-action-75: oklch(43% 0.147 255);
+  --color-action-90: oklch(35% 0.125 255);
+  --color-action-100: oklch(27% 0.099 255);
+  --color-action-105: oklch(16% 0.056 255);
+
+  /* success — positive/confirmation states */
+  --color-success-0: oklch(97% 0.008 150);
+  --color-success-5: oklch(93% 0.018 150);
+  --color-success-15: oklch(86% 0.042 150);
+  --color-success-30: oklch(74% 0.083 150);
+  --color-success-45: oklch(62% 0.12 150);
+  --color-success-60: oklch(52% 0.15 150);
+  --color-success-75: oklch(43% 0.138 150);
+  --color-success-90: oklch(35% 0.117 150);
+  --color-success-100: oklch(27% 0.093 150);
+  --color-success-105: oklch(16% 0.053 150);
+
+  /* accent — secondary highlight/pop color */
+  --color-accent-0: oklch(97% 0.009 290);
+  --color-accent-5: oklch(93% 0.02 290);
+  --color-accent-15: oklch(86% 0.048 290);
+  --color-accent-30: oklch(74% 0.094 290);
+  --color-accent-45: oklch(62% 0.136 290);
+  --color-accent-60: oklch(52% 0.17 290);
+  --color-accent-75: oklch(43% 0.156 290);
+  --color-accent-90: oklch(35% 0.133 290);
+  --color-accent-100: oklch(27% 0.105 290);
+  --color-accent-105: oklch(16% 0.06 290);
+
+  /* danger — destructive/error states */
+  --color-danger-0: oklch(97% 0.01 15);
+  --color-danger-5: oklch(93% 0.023 15);
+  --color-danger-15: oklch(86% 0.053 15);
+  --color-danger-30: oklch(74% 0.105 15);
+  --color-danger-45: oklch(62% 0.152 15);
+  --color-danger-60: oklch(52% 0.19 15);
+  --color-danger-75: oklch(43% 0.175 15);
+  --color-danger-90: oklch(35% 0.148 15);
+  --color-danger-100: oklch(27% 0.118 15);
+  --color-danger-105: oklch(16% 0.067 15);
+
+  /* grey — neutral scale for text, borders and surfaces */
+  --color-grey-0: oklch(97% 0 0);
+  --color-grey-5: oklch(93% 0 0);
+  --color-grey-15: oklch(86% 0 0);
+  --color-grey-30: oklch(74% 0 0);
+  --color-grey-45: oklch(62% 0 0);
+  --color-grey-60: oklch(52% 0 0);
+  --color-grey-75: oklch(43% 0 0);
+  --color-grey-90: oklch(35% 0 0);
+  --color-grey-100: oklch(27% 0 0);
+  --color-grey-105: oklch(16% 0 0);
+}
+
+/*
+   Bridge the theme into Vaadin's Lumo tokens so built-in components
+   (Button, Grid selection, focus rings, SideNav, etc.) pick up the same
+   palette as the Tailwind utility classes used in views.
+*/
+html {
+  --lumo-primary-color: var(--color-action-100);
+  --lumo-primary-color-50pct: color-mix(in oklch, var(--color-action-100) 50%, transparent);
+  --lumo-primary-color-10pct: color-mix(in oklch, var(--color-action-100) 10%, transparent);
+  --lumo-primary-text-color: var(--color-action-90);
+  --lumo-primary-contrast-color: var(--color-grey-0);
+
+  --lumo-error-color: var(--color-danger-100);
+  --lumo-error-color-50pct: color-mix(in oklch, var(--color-danger-100) 50%, transparent);
+  --lumo-error-color-10pct: color-mix(in oklch, var(--color-danger-100) 10%, transparent);
+  --lumo-error-text-color: var(--color-danger-90);
+
+  --lumo-success-color: var(--color-success-100);
+  --lumo-success-color-50pct: color-mix(in oklch, var(--color-success-100) 50%, transparent);
+  --lumo-success-color-10pct: color-mix(in oklch, var(--color-success-100) 10%, transparent);
+  --lumo-success-text-color: var(--color-success-90);
+
+  --lumo-body-text-color: var(--color-grey-105);
+  --lumo-secondary-text-color: var(--color-grey-75);
+  --lumo-disabled-text-color: var(--color-grey-30);
+  --lumo-contrast-10pct: color-mix(in oklch, var(--color-grey-105) 10%, transparent);
+  --lumo-contrast-30pct: color-mix(in oklch, var(--color-grey-105) 30%, transparent);
+}
+
 /* Example: CSS class name to center align the content . */
 .centered-content {
     margin: 0 auto;
@@ -14,4 +126,12 @@
 vaadin-text-field.bordered::part(input-field) {
     box-shadow: inset 0 0 0 1px var(--lumo-contrast-30pct);
     background-color: var(--lumo-base-color);
+}
+
+/* Active SideNav item: highlight via text only, no background/border. */
+vaadin-side-nav-item[current]::part(content) {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: var(--lumo-primary-text-color);
+    font-weight: 700;
 }
